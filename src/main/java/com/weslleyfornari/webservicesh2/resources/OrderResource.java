@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.weslleyfornari.webservicesh2.entities.User;
-import com.weslleyfornari.webservicesh2.services.UserService;
+import com.weslleyfornari.webservicesh2.entities.Order;
+import com.weslleyfornari.webservicesh2.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/orders")
+public class OrderResource {
 	
 	@Autowired
-	private UserService userServiço; // INJEÇÃO DE DEPENDENCIA
+	private OrderService orderServiço; // INJEÇÃO DE DEPENDENCIA
 
 // -------------------------------------------------------------------------------------------------------------
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> lista = userServiço.findAll();
+	public ResponseEntity<List<Order>> findAll(){
+		List<Order> lista = orderServiço.findAll();
 		return ResponseEntity.ok().body(lista);
 	}
 // -------------------------------------------------------------------------------------------------------------
 
-	@GetMapping(value= "/{id}") // MAPEA POR ID
-	public ResponseEntity<User> findById(@PathVariable Long id){
-	   User usuario = userServiço.findById(id);
-	   return ResponseEntity.ok().body(usuario);
-    }
+	@GetMapping(value= "/{id}")
+	public ResponseEntity<Order> findById(@PathVariable Long id){
+	   Order ordem = orderServiço.findById(id);
+	   return ResponseEntity.ok().body(ordem);
+   }
 // -------------------------------------------------------------------------------------------------------------	
 	
 	

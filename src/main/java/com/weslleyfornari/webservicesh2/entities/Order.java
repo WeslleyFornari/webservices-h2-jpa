@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.weslleyfornari.webservicesh2.entities.enums.OrderStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,8 @@ public class Order implements Serializable {
 	private Long id;
 	private Instant moment;
 	
+	private Integer ordemStatus;
+	
 	@ManyToOne // Orders -> User 
 	@JoinColumn(name = "client_id") // CRIA UMA COLUNA DA CLASSE ESTRANGEIRA
 	private User client; // DEPENDENCIA DA CLASSE "USER"
@@ -32,10 +36,11 @@ public class Order implements Serializable {
 		
 	}
 
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatus ordemStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		setOrdemStatus(ordemStatus);
 		this.client = client;
 	}
 
@@ -53,6 +58,16 @@ public class Order implements Serializable {
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+	
+	public OrderStatus getOrdemStatus() {
+		return OrderStatus.valueOf(ordemStatus);
+	}
+
+	public void setOrdemStatus(OrderStatus ordemStatus) {
+		if (ordemStatus != null) {
+		    this.ordemStatus = ordemStatus.getCode();
+	    }
 	}
 
 	public User getClient() {
@@ -79,6 +94,8 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 	

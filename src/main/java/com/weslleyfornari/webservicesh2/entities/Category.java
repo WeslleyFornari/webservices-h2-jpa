@@ -25,12 +25,12 @@ public class Category implements Serializable {
 		private Long id;
 		private String name;
 		
-		@Transient
+// --------------------------------------------------------------------------------------------------------		
+		@JsonIgnore
+		@ManyToMany(mappedBy = "categories")
 		private Set<Product> products = new HashSet<>(); // VARIOS PRODUTOS 
 
-//		@JsonIgnore
-//		@ManyToMany(mappedBy = "categorias")
-//		private Set<Product> products = new HashSet<>();
+// --------------------------------------------------------------------------------------------------------		
 		
 		public Category() {
 		}

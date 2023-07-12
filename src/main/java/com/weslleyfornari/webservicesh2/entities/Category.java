@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_category")
@@ -23,6 +24,9 @@ public class Category implements Serializable {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 		private String name;
+		
+		@Transient
+		private Set<Product> products = new HashSet<>(); // VARIOS PRODUTOS 
 
 //		@JsonIgnore
 //		@ManyToMany(mappedBy = "categorias")
@@ -52,10 +56,10 @@ public class Category implements Serializable {
 		public void setName(String name) {
 			this.name = name;
 		}
-
-//		public Set<Product> getProducts() {
-//			return products;
-//		}
+		
+		public Set<Product> getProducts() {
+			return products;
+		}
 		
 		@Override
 		public int hashCode() {
@@ -81,6 +85,10 @@ public class Category implements Serializable {
 				return false;
 			return true;
 		}
+
+		
+
+		
 
     }
 
